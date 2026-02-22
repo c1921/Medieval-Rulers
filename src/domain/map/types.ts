@@ -1,16 +1,19 @@
-export const MAP_WIDTH = 100 as const
-export const MAP_HEIGHT = 300 as const
+export const MAP_WIDTH = 80 as const
+export const MAP_HEIGHT = 80 as const
 export const TILE_SIZE_PX = 10 as const
 export const CHUNK_SIZE = 20 as const
 export const DEFAULT_SEED = 9527
-export const MAP_VERSION = 1 as const
+export const MAP_VERSION = 2 as const
 
 export type MapMode = 'deJure' | 'deFacto'
 export type MapLevel = 'county' | 'duchy' | 'kingdom'
+export type TitleRank = 'county' | 'duchy' | 'kingdom'
+export type TitleId = `${TitleRank}:${number}`
+export type CharacterId = `character:${number}`
 
 export interface GridConfig {
-  width: 100
-  height: 300
+  width: 80
+  height: 80
   tileSizePx: 10
   chunkSize: 20
   seed: number
@@ -25,11 +28,34 @@ export interface HierarchyData {
   kingdomNames: string[]
 }
 
-export interface WorldMapDataV1 {
-  version: 1
+export interface MapTitle {
+  id: TitleId
+  rank: TitleRank
+  entityId: number
+  name: string
+  mapColor: number
+  coatOfArmsSeed: string
+  holderCharacterId: CharacterId
+  deJureParentTitleId: TitleId | null
+  deFactoParentTitleId: TitleId | null
+}
+
+export interface MapCharacter {
+  id: CharacterId
+  name: string
+  primaryTitleId: TitleId
+  heldTitleIds: TitleId[]
+}
+
+export interface WorldMapDataV2 {
+  version: 2
   grid: GridConfig
   modes: Record<MapMode, HierarchyData>
+  titles: MapTitle[]
+  characters: MapCharacter[]
 }
+
+export type WorldMapData = WorldMapDataV2
 
 export interface MapViewState {
   mode: MapMode

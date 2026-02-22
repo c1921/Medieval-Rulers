@@ -1,4 +1,4 @@
-import type { GridConfig, HierarchyData, MapLevel, MapMode, WorldMapDataV1 } from './types'
+import type { GridConfig, HierarchyData, MapLevel, MapMode, WorldMapData } from './types'
 
 export function getTileCount(grid: GridConfig): number {
   return grid.width * grid.height
@@ -24,7 +24,7 @@ export function coordToTileId(x: number, y: number, grid: GridConfig): number | 
   return y * grid.width + x
 }
 
-export function getHierarchyByMode(data: WorldMapDataV1, mode: MapMode): HierarchyData {
+export function getHierarchyByMode(data: WorldMapData, mode: MapMode): HierarchyData {
   return data.modes[mode]
 }
 
@@ -55,7 +55,7 @@ export function getEntityIdForTile(
 }
 
 export function resolveEntityId(
-  data: WorldMapDataV1,
+  data: WorldMapData,
   mode: MapMode,
   level: MapLevel,
   tileId: number,
@@ -67,7 +67,7 @@ export function resolveEntityId(
 }
 
 export function buildActiveEntityByTile(
-  data: WorldMapDataV1,
+  data: WorldMapData,
   mode: MapMode,
   level: MapLevel,
 ): number[] {

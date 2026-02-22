@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
-import rawMapData from '../data/maps/world.v1.json'
+import rawMapData from '../data/maps/world.v2.json'
 import {
   DEFAULT_GRID_CONFIG,
   type MapMode,
   type MapLevel,
   type MapRenderSnapshot,
   type MapViewState,
-  type WorldMapDataV1,
+  type WorldMapDataV2,
 } from '../domain/map/types'
 import {
   buildActiveEntityByTile,
@@ -17,7 +17,7 @@ import {
 import { validateWorldMapData } from '../domain/map/validation'
 
 interface MapStoreState {
-  data: WorldMapDataV1 | null
+  data: WorldMapDataV2 | null
   loading: boolean
   loadError: string | null
   view: MapViewState
